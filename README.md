@@ -12,8 +12,10 @@ Tesseract - https://github.com/tesseract-ocr/tesseract/wiki
 
 ###### Ubuntu install
 
-`sudo apt-get install imagemagick ghostscript tesseract-ocr`
-
+```
+sudo apt-get install imagemagick ghostscript tesseract-ocr
+wget http://www.fmwconcepts.com/imagemagick/downloadcounter.php?scriptname=textcleaner&dirname=textcleaner
+```
 ###### MacOS install
 
 ```
