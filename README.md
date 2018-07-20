@@ -37,6 +37,8 @@ These seem to be the optimal values for `-f` and `-t` but maybe there are other 
 
 `./textcleaner -g -e stretch -f 10 -o 5 -t 10 -u bond_i9-0.png textclean_i9.png`
 
-And finally run it through Tesseract and output an HOCR file (basically XML)
+#### Scanning with Tesseract
+
+Run it through Tesseract and output an HOCR file, which is basically HTML
 
 `tesseract -l eng bond_i9-0.png bond.html hocr`
