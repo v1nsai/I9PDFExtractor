@@ -8,6 +8,18 @@ import java.util.List;
 import org.apache.pdfbox.pdmodel.PDPage;
 
 public class nocr {
+
+    static float pwidth;
+    static float pheight;
+
+    private static int widthByPercent(double percent) {
+        return (int)Math.round(percent * pwidth);
+    }
+
+    private static int heightByPercent(double percent) {
+        return (int)Math.round(percent * pheight);
+    }
+
     public static void main(String[] args) {
 
         try {
@@ -21,24 +33,50 @@ public class nocr {
             PDPage page = allPages.get(0);
 
             //Convert to percentages, safer to use on variable sized documents and easier to use
-            float pheight = page.getMediaBox().getHeight() / 100;
-            float pwidth = page.getMediaBox().getWidth() / 100;
+            //height = 841.8901 width = 595.28
+            pheight = page.getMediaBox().getHeight() / 100;
+            pwidth = page.getMediaBox().getWidth() / 100;
 
             //Define the areas to search
-            //Rectangle(upperleft_x, upperleft_y, width, height
-            Rectangle lname = new Rectangle((int)Math.round(9.5 * pwidth), (int)Math.round(18 * pheight), 159, 25);
-            Rectangle fname = new Rectangle((int)Math.round(36 * pwidth), (int)Math.round(18 * pheight), 128, 25);
-            Rectangle middleinit = new Rectangle((int)Math.round(36 * pwidth), (int)Math.round(18 * pheight), 128, 25);
-            Rectangle maiden = new Rectangle((int)Math.round(36 * pwidth), (int)Math.round(18 * pheight), 128, 25);
-            Rectangle address = new Rectangle((int)Math.round(3 * pwidth), (int)Math.round(21.5 * pheight), 128, 25);
-            Rectangle apt = new Rectangle((int)Math.round(36 * pwidth), (int)Math.round(18 * pheight), 128, 25);
-            Rectangle dob = new Rectangle((int)Math.round(60 * pwidth), (int)Math.round(18 * pheight), 128, 25);
+            //Rectangle(upperleft_x, upperleft_y, width, height)
+            Rectangle lname = new Rectangle(widthByPercent(9), heightByPercent(18.7), widthByPercent(23), heightByPercent(1));
+            Rectangle fname = new Rectangle(widthByPercent(36), heightByPercent(18.7), widthByPercent(23), heightByPercent(1));
+           Rectangle middleinit = new Rectangle(widthByPercent(61.5), heightByPercent(18.7), widthByPercent(26), heightByPercent(1));
+           Rectangle maiden = new Rectangle(widthByPercent(71), heightByPercent(18.7), widthByPercent(26), heightByPercent(1));
+            Rectangle address = new Rectangle(widthByPercent(3), heightByPercent(22), widthByPercent(40), heightByPercent(1));
+            Rectangle apt = new Rectangle(widthByPercent(58), heightByPercent(22), widthByPercent(11), heightByPercent(1));
+            Rectangle dob = new Rectangle(widthByPercent(70), heightByPercent(22), widthByPercent(21), heightByPercent(1));
+            Rectangle city = new Rectangle(widthByPercent(3), heightByPercent(26), widthByPercent(26), heightByPercent(1));
+            Rectangle state = new Rectangle(widthByPercent(32), heightByPercent(26), widthByPercent(11), heightByPercent(1));
+            Rectangle zip = new Rectangle(widthByPercent(58), heightByPercent(26), widthByPercent(11), heightByPercent(1));
+            Rectangle ssn = new Rectangle(widthByPercent(70), heightByPercent(26), widthByPercent(16.5), heightByPercent(1));
+            Rectangle citizen = new Rectangle(widthByPercent(48.5), heightByPercent(29.5), widthByPercent(40), heightByPercent(1));
+            Rectangle national = new Rectangle(widthByPercent(48.5), heightByPercent(31), widthByPercent(40), heightByPercent(1));
+            Rectangle resident = new Rectangle(widthByPercent(48.5), heightByPercent(33), widthByPercent(40), heightByPercent(1));
+            Rectangle alien = new Rectangle(widthByPercent(48.5), heightByPercent(35), widthByPercent(40), heightByPercent(1));
+            Rectangle translatorname = new Rectangle(widthByPercent(52), heightByPercent(44.5), widthByPercent(25), heightByPercent(1));
+            Rectangle translatoraddress = new Rectangle(widthByPercent(8), heightByPercent(48), widthByPercent(40), heightByPercent(1));
+            Rectangle translatordate = new Rectangle(widthByPercent(70), heightByPercent(48), widthByPercent(20), heightByPercent(1));
+            Rectangle boxAdoctitle = new Rectangle(widthByPercent(12), heightByPercent(56), widthByPercent(21.5), heightByPercent(1));
+            Rectangle boxAissuer = new Rectangle(widthByPercent(13), heightByPercent(58), widthByPercent(20), heightByPercent(1));
+            Rectangle boxAdocnumber1 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
+            Rectangle boxAexpiration1 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
+            Rectangle boxAdocnumber2 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
+            Rectangle boxAexpiration2 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
+            Rectangle boxBline1 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
+            Rectangle boxBline2 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
+            Rectangle boxBline3 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
+            Rectangle boxBline4 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
+            Rectangle boxCline1 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
+            Rectangle boxCline2 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
+            Rectangle boxCline3 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
+            Rectangle boxCline4 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
 
-            stripper.addRegion("lastName", address);
+            stripper.addRegion("lastName", citizen);
 
             //Search the area and print the found text
-            stripper.extractRegions(page);
             stripper.setSortByPosition(true);
+            stripper.extractRegions(page);
             String text = stripper.getTextForRegion(stripper.getRegions().get(0));
             System.out.println(text);
 
