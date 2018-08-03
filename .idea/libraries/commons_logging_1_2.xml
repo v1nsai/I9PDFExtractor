@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="commons-logging-1.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/nocr/commons-logging-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/nocr/fontbox-1.8.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/nocr/pdfbox-1.8.15.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

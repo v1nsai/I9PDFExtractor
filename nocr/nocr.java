@@ -24,7 +24,7 @@ public class nocr {
 
         try {
             //Create objects
-            File file = new File("/Users/doctor_ew/IdeaProjects/I9PDFExtractor/nocr/2011_i9_test_noPIV.pdf");
+            File file = new File("C:\\Users\\Andrew Riffle\\IdeaProjects\\I9PDFExtractor\\nocr\\ 2011_i9_test_noPIV.pdf");
             PDDocument document = PDDocument.load(file);
             PDFTextStripperByArea stripper = new PDFTextStripperByArea();
 
@@ -39,6 +39,7 @@ public class nocr {
 
             //Define the areas to search
             //Rectangle(upperleft_x, upperleft_y, width, height)
+            Rectangle fullname = new Rectangle(widthByPercent(2.5), heightByPercent(19), widthByPercent(67), heightByPercent(1));
             Rectangle lname = new Rectangle(widthByPercent(9), heightByPercent(18.7), widthByPercent(23), heightByPercent(1));
             Rectangle fname = new Rectangle(widthByPercent(36), heightByPercent(18.7), widthByPercent(23), heightByPercent(1));
            Rectangle middleinit = new Rectangle(widthByPercent(61.5), heightByPercent(18.7), widthByPercent(26), heightByPercent(1));
@@ -59,20 +60,27 @@ public class nocr {
             Rectangle translatordate = new Rectangle(widthByPercent(70), heightByPercent(48), widthByPercent(20), heightByPercent(1));
             Rectangle boxAdoctitle = new Rectangle(widthByPercent(12), heightByPercent(56), widthByPercent(21.5), heightByPercent(1));
             Rectangle boxAissuer = new Rectangle(widthByPercent(13), heightByPercent(58), widthByPercent(20), heightByPercent(1));
-            Rectangle boxAdocnumber1 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
-            Rectangle boxAexpiration1 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
-            Rectangle boxAdocnumber2 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
-            Rectangle boxAexpiration2 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
-            Rectangle boxBline1 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
-            Rectangle boxBline2 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
-            Rectangle boxBline3 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
-            Rectangle boxBline4 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
-            Rectangle boxCline1 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
-            Rectangle boxCline2 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
-            Rectangle boxCline3 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
-            Rectangle boxCline4 = new Rectangle(widthByPercent(45), heightByPercent(32.5), widthByPercent(40), heightByPercent(1));
+            Rectangle boxAdocnumber1 = new Rectangle(widthByPercent(10.5), heightByPercent(60.5), widthByPercent(20), heightByPercent(1));
+            Rectangle boxAexpiration1 = new Rectangle(widthByPercent(20.5), heightByPercent(62), widthByPercent(20), heightByPercent(1));
+            Rectangle boxAdocnumber2 = new Rectangle(widthByPercent(10.5), heightByPercent(64), widthByPercent(20), heightByPercent(1));
+            Rectangle boxAexpiration2 = new Rectangle(widthByPercent(20.5), heightByPercent(66), widthByPercent(20), heightByPercent(1));
+            Rectangle boxBline1 = new Rectangle(widthByPercent(38.5), heightByPercent(56.5), widthByPercent(20), heightByPercent(1));
+            Rectangle boxBline2 = new Rectangle(widthByPercent(38.5), heightByPercent(58.5), widthByPercent(20), heightByPercent(1));
+            Rectangle boxBline3 = new Rectangle(widthByPercent(38.5), heightByPercent(60.5), widthByPercent(20), heightByPercent(1));
+            Rectangle boxBline4 = new Rectangle(widthByPercent(38.5), heightByPercent(62.5), widthByPercent(20), heightByPercent(1));
+            Rectangle boxCline1 = new Rectangle(widthByPercent(72.5), heightByPercent(56.5), widthByPercent(20), heightByPercent(1));
+            Rectangle boxCline2 = new Rectangle(widthByPercent(72.5), heightByPercent(58.5), widthByPercent(20), heightByPercent(1));
+            Rectangle boxCline3 = new Rectangle(widthByPercent(72.5), heightByPercent(60.5), widthByPercent(20), heightByPercent(1));
+            Rectangle boxCline4 = new Rectangle(widthByPercent(72.5), heightByPercent(62.5), widthByPercent(20), heightByPercent(1));
+            Rectangle formvertop = new Rectangle(widthByPercent(0), heightByPercent(0), widthByPercent(100), heightByPercent(8));
+            Rectangle formverbottom = new Rectangle(widthByPercent(0), heightByPercent(92), widthByPercent(100), heightByPercent(8));
+            Rectangle examinername = new Rectangle(widthByPercent(39), heightByPercent(75.5), widthByPercent(20), heightByPercent(1));
+            Rectangle examinertitle = new Rectangle(widthByPercent(71), heightByPercent(75.5), widthByPercent(20), heightByPercent(1));
+            Rectangle examinerbusiness_address = new Rectangle(widthByPercent(2), heightByPercent(78), widthByPercent(67), heightByPercent(1));
+            Rectangle boxCline4 = new Rectangle(widthByPercent(72.5), heightByPercent(62.5), widthByPercent(20), heightByPercent(1));
 
-            stripper.addRegion("lastName", citizen);
+
+            stripper.addRegion("lastName", translatorname);
 
             //Search the area and print the found text
             stripper.setSortByPosition(true);
