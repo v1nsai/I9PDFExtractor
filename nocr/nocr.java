@@ -24,7 +24,7 @@ public class nocr {
 
         try {
             //Create objects
-            File file = new File("C:\\Users\\Andrew Riffle\\IdeaProjects\\I9PDFExtractor\\nocr\\ 2011_i9_test_noPIV.pdf");
+            File file = new File("C:\\Users\\Andrew Riffle\\IdeaProjects\\I9PDFExtractor\\nocr\\2011_i9_test_noPIV.pdf");
             PDDocument document = PDDocument.load(file);
             PDFTextStripperByArea stripper = new PDFTextStripperByArea();
 
@@ -77,10 +77,8 @@ public class nocr {
             Rectangle examinername = new Rectangle(widthByPercent(39), heightByPercent(75.5), widthByPercent(20), heightByPercent(1));
             Rectangle examinertitle = new Rectangle(widthByPercent(71), heightByPercent(75.5), widthByPercent(20), heightByPercent(1));
             Rectangle examinerbusiness_address = new Rectangle(widthByPercent(2), heightByPercent(78), widthByPercent(67), heightByPercent(1));
-            Rectangle boxCline4 = new Rectangle(widthByPercent(72.5), heightByPercent(62.5), widthByPercent(20), heightByPercent(1));
 
-
-            stripper.addRegion("lastName", translatorname);
+            stripper.addRegion("lastName", fullname);
 
             //Search the area and print the found text
             stripper.setSortByPosition(true);
