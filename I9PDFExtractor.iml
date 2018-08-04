@@ -9,5 +9,7 @@
     <orderEntry type="library" name="pdfbox-1.8.15" level="application" />
     <orderEntry type="library" name="commons-logging-1.2" level="project" />
     <orderEntry type="library" name="libs" level="project" />
+    <orderEntry type="library" name="groovy-2.5.1" level="application" />
+    <orderEntry type="library" name="gson-2.8.6-SNAPSHOT" level="project" />
   </component>
 </module>

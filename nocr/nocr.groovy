@@ -2,6 +2,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.util.PDFTextStripperByArea;
 import java.awt.Rectangle;
 import org.apache.pdfbox.pdmodel.PDPage;
+import com.google.gson.Gson;
 
 class nocr {
 
@@ -20,7 +21,7 @@ class nocr {
 
         try {
             //Create objects
-            File file = new File("C:\\Users\\Andrew Riffle\\IdeaProjects\\I9PDFExtractor\\nocr\\2011_i9_test_noPIV.pdf");
+            File file = new File("/Users/doctor_ew/IdeaProjects/I9PDFExtractor/nocr/2011_i9_test_noPIV.pdf");
             PDDocument document = PDDocument.load(file);
             PDFTextStripperByArea stripper = new PDFTextStripperByArea();
 
@@ -114,8 +115,39 @@ class nocr {
             //Search the area and print the found text
             stripper.setSortByPosition(true);
             stripper.extractRegions(page);
-            String text = stripper.getTextForRegion(stripper.getRegions().get(0));
-            System.out.println(text);
+//            String text = stripper.getTextForRegion(stripper.getRegions().get(0));
+//            System.out.println(text);
+
+            //Load the results into a JSON
+            def boxMap = [:]
+            List<String> regions = stripper.getRegions();
+            for (String region : regions) {
+                String box = stripper.getTextForRegion(region);
+                boxMap.put(region, box)
+            }
+
+            Gson gson = new Gson();
+            String json = gson.toJson(boxMap, LinkedHashMap.class);
+            json = json.replace('\\n', '')
+            new File('/Users/doctor_ew/IdeaProjects/I9PDFExtractor/nocr/results.json').withWriter('utf-8') { writer ->
+                writer.write(json)
+            }
+
+//            def os = new File('/Users/doctor_ew/IdeaProjects/I9PDFExtractor/nocr/results.json').newOutputStream()
+//            os.write(boxMap)
+//            os.close()
+
+//            FileOutputStream fout = new FileOutputStream("/Users/doctor_ew/IdeaProjects/I9PDFExtractor/nocr/results.json");
+//            ObjectOutputStream oos = new ObjectOutputStream(fout);
+//            oos.writeObject(boxMap);
+
+//            Writer out = new BufferedWriter(new OutputStreamWriter(
+//                    new FileOutputStream("/Users/doctor_ew/IdeaProjects/I9PDFExtractor/nocr/results.json"), "UTF-8"));
+//            try {
+//                out.write((String)boxMap);
+//            } finally {
+//                out.close();
+//            }
 
         } catch (Exception e){
             System.out.println(e.getMessage());
