@@ -36,7 +36,16 @@ class nocr {
             pheight = page.getMediaBox().getHeight() / 100
             pwidth = page.getMediaBox().getWidth() / 100
 
+            //Find the form version
+            Rectangle formvertop = new Rectangle(widthByPercent(0), heightByPercent(0), widthByPercent(100), heightByPercent(8))
+            stripper.addRegion("formvertop", formvertop)
+            Rectangle formverbottom = new Rectangle(widthByPercent(0), heightByPercent(92), widthByPercent(100), heightByPercent(8))
+            stripper.addRegion("formverbottom", formverbottom)
+            stripper.setSortByPosition(true)
+            stripper.extractRegions(page)
+
             //Define the areas to search and add them as search regions
+            stripper = new PDFTextStripperByArea()
             Rectangle fullname = new Rectangle(widthByPercent(2.5), heightByPercent(19), widthByPercent(67), heightByPercent(1))
             stripper.addRegion("fullname", fullname)
             Rectangle lname = new Rectangle(widthByPercent(9), heightByPercent(18.7), widthByPercent(23), heightByPercent(1))
@@ -103,10 +112,6 @@ class nocr {
             stripper.addRegion("boxCline3", boxCline3)
             Rectangle boxCline4 = new Rectangle(widthByPercent(72.5), heightByPercent(62.5), widthByPercent(20), heightByPercent(1))
             stripper.addRegion("boxCline4", boxCline4)
-            Rectangle formvertop = new Rectangle(widthByPercent(0), heightByPercent(0), widthByPercent(100), heightByPercent(8))
-            stripper.addRegion("formvertop", formvertop)
-            Rectangle formverbottom = new Rectangle(widthByPercent(0), heightByPercent(92), widthByPercent(100), heightByPercent(8))
-            stripper.addRegion("formverbottom", formverbottom)
             Rectangle examinername = new Rectangle(widthByPercent(39), heightByPercent(75.5), widthByPercent(20), heightByPercent(1))
             stripper.addRegion("examinername", examinername)
             Rectangle examinertitle = new Rectangle(widthByPercent(71), heightByPercent(75.5), widthByPercent(20), heightByPercent(1))
