@@ -50,14 +50,14 @@ class nocr {
                 ver = ver + swap
             }
             if(ver.contains('(Rev. 08/07/09)')){
-                System.out.println('it works')
+//                System.out.println('it works')
             }
 
             //Define the areas to search and add them as search regions
             stripper = new PDFTextStripperByArea()
             Rectangle fullname = new Rectangle(widthByPercent(2.5), heightByPercent(19), widthByPercent(67), heightByPercent(1))
             stripper.addRegion("fullname", fullname)
-            Rectangle lname = new Rectangle(widthByPercent(9), heightByPercent(18.7), widthByPercent(23), heightByPercent(1))
+            Rectangle lname = new Rectangle(widthByPercent(2.5), heightByPercent(19), widthByPercent(27), heightByPercent(1))
             stripper.addRegion("lname", lname)
             Rectangle fname = new Rectangle(widthByPercent(36), heightByPercent(18.7), widthByPercent(23), heightByPercent(1))
             stripper.addRegion("fname", fname)
@@ -127,24 +127,41 @@ class nocr {
             stripper.addRegion("examinertitle", examinertitle)
             Rectangle examinerbusiness_address = new Rectangle(widthByPercent(2), heightByPercent(78), widthByPercent(67), heightByPercent(1))
             stripper.addRegion("examinerbusiness_address", examinerbusiness_address)
+            Rectangle examinerdate = new Rectangle(widthByPercent(2), heightByPercent(78), widthByPercent(67), heightByPercent(1))
+            stripper.addRegion("examinerdate", examinerdate)
+            Rectangle updatename = new Rectangle(widthByPercent(2), heightByPercent(78), widthByPercent(67), heightByPercent(1))
+            stripper.addRegion("updatename", updatename)
+            Rectangle updaterehiredate = new Rectangle(widthByPercent(2), heightByPercent(78), widthByPercent(67), heightByPercent(1))
+            stripper.addRegion("updaterehiredate", updaterehiredate)
+            Rectangle updatedoctitle = new Rectangle(widthByPercent(2), heightByPercent(78), widthByPercent(67), heightByPercent(1))
+            stripper.addRegion("updatedoctitle", updatedoctitle)
+            Rectangle updatedocnum = new Rectangle(widthByPercent(2), heightByPercent(78), widthByPercent(67), heightByPercent(1))
+            stripper.addRegion("updatedocnum", updatedocnum)
+            Rectangle updateexpiration = new Rectangle(widthByPercent(2), heightByPercent(78), widthByPercent(67), heightByPercent(1))
+            stripper.addRegion("updateexpiration", updateexpiration)
+            Rectangle updatedate = new Rectangle(widthByPercent(2), heightByPercent(78), widthByPercent(67), heightByPercent(1))
+            stripper.addRegion("updatedate", updatedate)
 
             //Search the area and print the found text
             stripper.setSortByPosition(true)
             stripper.extractRegions(page)
+            String text = stripper.getTextForRegion('lname')
+            System.out.println(text)
 
             //Load the results into a JSON
-            def boxMap = [:]
-            regions = stripper.getRegions()
-            for (String region : regions) {
-                String box = stripper.getTextForRegion(region)
-                boxMap.put(region, box)
-            }
-            Gson gson = new Gson()
-            String json = gson.toJson(boxMap, LinkedHashMap.class)
-            json = json.replace('\\n', '')
-            new File('/Users/doctor_ew/IdeaProjects/I9PDFExtractor/nocr/results.json').withWriter('utf-8') { writer ->
-                writer.write(json)
-            }
+//            def boxMap = [:]
+//            regions = stripper.getRegions()
+//            for (String region : regions) {
+//                String box = stripper.getTextForRegion(region)
+//                boxMap.put(region, box)
+//            }
+//            Gson gson = new Gson()
+//            String json = gson.toJson(boxMap, LinkedHashMap.class)
+//            json = json.replace('\\n', '')
+//            json = json.replace(',"', ',\n"')
+//            new File('/Users/doctor_ew/IdeaProjects/I9PDFExtractor/nocr/results.json').withWriter('utf-8') { writer ->
+//                writer.write(json)
+//            }
 
         } catch (Exception e){
             System.out.println(e.getMessage())
