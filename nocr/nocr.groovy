@@ -36,13 +36,22 @@ class nocr {
             pheight = page.getMediaBox().getHeight() / 100
             pwidth = page.getMediaBox().getWidth() / 100
 
-            //Find the form version
+            //Find the form version and load the JSON containing the proper coords
             Rectangle formvertop = new Rectangle(widthByPercent(0), heightByPercent(0), widthByPercent(100), heightByPercent(8))
             stripper.addRegion("formvertop", formvertop)
             Rectangle formverbottom = new Rectangle(widthByPercent(0), heightByPercent(92), widthByPercent(100), heightByPercent(8))
             stripper.addRegion("formverbottom", formverbottom)
             stripper.setSortByPosition(true)
             stripper.extractRegions(page)
+            List<String> regions = stripper.getRegions()
+            String ver = ''
+            for (String region : regions) {
+                String swap = stripper.getTextForRegion(region)
+                ver = ver + swap
+            }
+            if(ver.contains('(Rev. 08/07/09)')){
+                System.out.println('it works')
+            }
 
             //Define the areas to search and add them as search regions
             stripper = new PDFTextStripperByArea()
@@ -125,12 +134,11 @@ class nocr {
 
             //Load the results into a JSON
             def boxMap = [:]
-            List<String> regions = stripper.getRegions()
+            regions = stripper.getRegions()
             for (String region : regions) {
                 String box = stripper.getTextForRegion(region)
                 boxMap.put(region, box)
             }
-
             Gson gson = new Gson()
             String json = gson.toJson(boxMap, LinkedHashMap.class)
             json = json.replace('\\n', '')
