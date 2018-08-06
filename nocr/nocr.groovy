@@ -23,7 +23,7 @@ class nocr {
 
         try {
             //Create objects
-            File file = new File("/Users/doctor_ew/IdeaProjects/I9PDFExtractor/nocr/2011_i9_test_noPIV.pdf")
+            File file = new File("C:\\Users\\Andrew Riffle\\IdeaProjects\\I9PDFExtractor\\nocr\\2011_i9_test_noPIV.pdf")
             PDDocument document = PDDocument.load(file)
             PDFTextStripperByArea stripper = new PDFTextStripperByArea()
 
@@ -55,29 +55,29 @@ class nocr {
 
             //Define the areas to search and add them as search regions
             stripper = new PDFTextStripperByArea()
-            Rectangle fullname = new Rectangle(widthByPercent(2.5), heightByPercent(19), widthByPercent(67), heightByPercent(1))
+            Rectangle fullname = new Rectangle(widthByPercent(2), heightByPercent(19.5), widthByPercent(67), heightByPercent(1))
             stripper.addRegion("fullname", fullname)
-            Rectangle lname = new Rectangle(widthByPercent(2.5), heightByPercent(19), widthByPercent(27), heightByPercent(1))
+            Rectangle lname = new Rectangle(widthByPercent(2), heightByPercent(19.5), widthByPercent(27), heightByPercent(1))
             stripper.addRegion("lname", lname)
-            Rectangle fname = new Rectangle(widthByPercent(36), heightByPercent(18.7), widthByPercent(23), heightByPercent(1))
+            Rectangle fname = new Rectangle(widthByPercent(30.5), heightByPercent(19.5), widthByPercent(23), heightByPercent(1))
             stripper.addRegion("fname", fname)
-            Rectangle middleinit = new Rectangle(widthByPercent(61.5), heightByPercent(18.7), widthByPercent(26), heightByPercent(1))
+            Rectangle middleinit = new Rectangle(widthByPercent(61.5), heightByPercent(19.5), widthByPercent(10), heightByPercent(1))
             stripper.addRegion("middleinit", middleinit)
-            Rectangle maiden = new Rectangle(widthByPercent(71), heightByPercent(18.7), widthByPercent(26), heightByPercent(1))
+            Rectangle maiden = new Rectangle(widthByPercent(70.5), heightByPercent(19.5), widthByPercent(26), heightByPercent(1))
             stripper.addRegion("maiden", maiden)
-            Rectangle address = new Rectangle(widthByPercent(3), heightByPercent(22), widthByPercent(40), heightByPercent(1))
+            Rectangle address = new Rectangle(widthByPercent(3), heightByPercent(23), widthByPercent(54), heightByPercent(1))
             stripper.addRegion("address", address)
-            Rectangle apt = new Rectangle(widthByPercent(58), heightByPercent(22), widthByPercent(11), heightByPercent(1))
+            Rectangle apt = new Rectangle(widthByPercent(57), heightByPercent(23), widthByPercent(12), heightByPercent(1))
             stripper.addRegion("apt", apt)
-            Rectangle dob = new Rectangle(widthByPercent(70), heightByPercent(22), widthByPercent(21), heightByPercent(1))
+            Rectangle dob = new Rectangle(widthByPercent(70), heightByPercent(23), widthByPercent(21), heightByPercent(1))
             stripper.addRegion("dob", dob)
-            Rectangle city = new Rectangle(widthByPercent(3), heightByPercent(26), widthByPercent(26), heightByPercent(1))
+            Rectangle city = new Rectangle(widthByPercent(2), heightByPercent(26.5), widthByPercent(26), heightByPercent(1))
             stripper.addRegion("city", city)
-            Rectangle state = new Rectangle(widthByPercent(32), heightByPercent(26), widthByPercent(11), heightByPercent(1))
+            Rectangle state = new Rectangle(widthByPercent(30.5), heightByPercent(26.5), widthByPercent(20), heightByPercent(1))
             stripper.addRegion("state", state)
-            Rectangle zip = new Rectangle(widthByPercent(58), heightByPercent(26), widthByPercent(11), heightByPercent(1))
+            Rectangle zip = new Rectangle(widthByPercent(56), heightByPercent(26.5), widthByPercent(11), heightByPercent(1))
             stripper.addRegion("zip", zip)
-            Rectangle ssn = new Rectangle(widthByPercent(70), heightByPercent(26), widthByPercent(16.5), heightByPercent(1))
+            Rectangle ssn = new Rectangle(widthByPercent(70), heightByPercent(26.5), widthByPercent(16.5), heightByPercent(1))
             stripper.addRegion("ssn", ssn)
             Rectangle citizen = new Rectangle(widthByPercent(48.5), heightByPercent(29.5), widthByPercent(40), heightByPercent(1))
             stripper.addRegion("citizen", citizen)
@@ -143,26 +143,28 @@ class nocr {
             stripper.addRegion("updatedate", updatedate)
 
             //Search the area and print the found text
-            stripper.setSortByPosition(true)
-            stripper.extractRegions(page)
-            String text = stripper.getTextForRegion('lname')
-            System.out.println(text)
+//            stripper.setSortByPosition(true)
+//            stripper.extractRegions(page)
+//            String text = stripper.getTextForRegion('lname')
+//            System.out.println(text)
 
             //Load the results into a JSON
-//            def boxMap = [:]
-//            regions = stripper.getRegions()
-//            for (String region : regions) {
-//                String box = stripper.getTextForRegion(region)
-//                boxMap.put(region, box)
-//            }
-//            Gson gson = new Gson()
-//            String json = gson.toJson(boxMap, LinkedHashMap.class)
-//            json = json.replace('\\n', '')
-//            json = json.replace(',"', ',\n"')
-//            new File('/Users/doctor_ew/IdeaProjects/I9PDFExtractor/nocr/results.json').withWriter('utf-8') { writer ->
-//                writer.write(json)
-//            }
-
+            def boxMap = [:]
+            stripper.setSortByPosition(true)
+            stripper.extractRegions(page)
+            regions = stripper.getRegions()
+            for (String region : regions) {
+                String box = stripper.getTextForRegion(region)
+                boxMap.put(region, box)
+            }
+            Gson gson = new Gson()
+            String json = gson.toJson(boxMap, LinkedHashMap.class)
+            json = json.replace('\\n', '')
+            json = json.replace('\\r', '')
+            json = json.replace(',"', ',\n"')
+            new File('C:\\Users\\Andrew Riffle\\IdeaProjects\\I9PDFExtractor\\nocr\\results.json').withWriter('utf-8') { writer ->
+                writer.write(json)
+            }
         } catch (Exception e){
             System.out.println(e.getMessage())
         }
