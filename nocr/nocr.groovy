@@ -55,11 +55,11 @@ class nocr {
 
             //Define the areas to search and add them as search regions
             stripper = new PDFTextStripperByArea()
-            Rectangle fullname = new Rectangle(widthByPercent(2), heightByPercent(19.5), widthByPercent(67), heightByPercent(1))
-            stripper.addRegion("fullname", fullname)
+//            Rectangle fullname = new Rectangle(widthByPercent(2), heightByPercent(19.5), widthByPercent(58), heightByPercent(1))
+//            stripper.addRegion("fullname", fullname)
             Rectangle lname = new Rectangle(widthByPercent(2), heightByPercent(19.5), widthByPercent(27), heightByPercent(1))
             stripper.addRegion("lname", lname)
-            Rectangle fname = new Rectangle(widthByPercent(30.5), heightByPercent(19.5), widthByPercent(23), heightByPercent(1))
+            Rectangle fname = new Rectangle(widthByPercent(29), heightByPercent(19.5), widthByPercent(23), heightByPercent(1))
             stripper.addRegion("fname", fname)
             Rectangle middleinit = new Rectangle(widthByPercent(61.5), heightByPercent(19.5), widthByPercent(10), heightByPercent(1))
             stripper.addRegion("middleinit", middleinit)
