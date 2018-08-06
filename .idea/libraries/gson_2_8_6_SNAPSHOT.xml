@@ -1,8 +1,0 @@
-<component name="libraryTable">
-  <library name="gson-2.8.6-SNAPSHOT">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/nocr/libs/gson-2.8.6-SNAPSHOT.jar!/" />
-    </CLASSES>
-    <SOURCES />
-  </library>
-</component>

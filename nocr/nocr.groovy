@@ -1,3 +1,4 @@
+import org.apache.pdfbox.io.IOUtils
 import org.apache.pdfbox.pdmodel.PDDocument
 import org.apache.pdfbox.util.PDFTextStripperByArea
 import java.awt.Rectangle
@@ -23,7 +24,11 @@ class nocr {
 
         try {
             //Create objects
-            File file = new File("C:\\Users\\Andrew Riffle\\IdeaProjects\\I9PDFExtractor\\nocr\\2011_i9_test_noPIV.pdf")
+//            File file = new File("C:\\Users\\Andrew Riffle\\IdeaProjects\\I9PDFExtractor\\nocr\\2011_i9_test_noPIV.pdf")
+            File file = new File()
+            OutputStream os = new FileOutputStream(file)
+            IOUtils.copy(System.in, os)
+            os.close()
             PDDocument document = PDDocument.load(file)
             PDFTextStripperByArea stripper = new PDFTextStripperByArea()
 
@@ -162,9 +167,10 @@ class nocr {
             json = json.replace('\\n', '')
             json = json.replace('\\r', '')
             json = json.replace(',"', ',\n"')
-            new File('C:\\Users\\Andrew Riffle\\IdeaProjects\\I9PDFExtractor\\nocr\\results.json').withWriter('utf-8') { writer ->
-                writer.write(json)
-            }
+//            new File('C:\\Users\\Andrew Riffle\\IdeaProjects\\I9PDFExtractor\\nocr\\results2.json').withWriter('utf-8') { writer ->
+//                writer.write(json)
+//            }
+            System.out.print(json)
         } catch (Exception e){
             System.out.println(e.getMessage())
         }

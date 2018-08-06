@@ -1,10 +1,12 @@
 <component name="libraryTable">
   <library name="libs">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/nocr/libs/commons-logging-1.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/nocr/libs/pdfbox-1.8.15.jar!/" />
       <root url="jar://$PROJECT_DIR$/nocr/libs/fontbox-1.8.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/nocr/libs/pdfbox-1.8.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/nocr/libs/commons-logging-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/nocr/libs/gson-2.8.6-SNAPSHOT.jar!/" />
     </CLASSES>
+    <JAVADOC />
     <SOURCES />
   </library>
 </component>
