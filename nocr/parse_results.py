@@ -1,21 +1,25 @@
 import pandas as pd
 from pandas.io.json import json_normalize
-import os
+import sys
 import json
-import csv
+from pathlib import Path
 
-os.chdir(r'C:\Users\Andrew Riffle\PycharmProjects\I9PDFExtractor\nocr')
-
-with open('results.json') as f:
-    data = json.load(f)
-
+# Put the incoming FlowFile into a dataframe
+flowFile = sys.stdin.read()
+data = json.loads(flowFile)
 df = json_normalize(data)
-df.to_csv('df.csv')
 
+# Check for previous output and append to it or create a new output file
+results_file = Path('/data/fast/hortonworks/I9PDFExtractor/nocr/results.csv')
+if results_file.is_file():
+    results = pd.read_csv('/data/fast/hortonworks/I9PDFExtractor/nocr/results.csv')
+    results = results.append(df)
+else:
+    results = df
 
+# results.to_csv('/data/fast/hortonworks/I9PDFExtractor/nocr/results.csv', index=False)
 
-
-
+results.to_csv(sys.stdout, index=False)
 
 # This works but its pretty hideous
 # results_csv = open('results.csv', 'w')
