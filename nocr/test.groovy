@@ -15,10 +15,7 @@ flowFile = session.write(flowFile, { inputStream, outputStream ->
         //Get the first page
         List<PDPage> allPages = document.getDocumentCatalog().getAllPages()
         PDPage page = allPages.get(0)
-    } catch (Exception e){
-        System.out.println(e.getMessage())
-        session.transfer(flowFile, REL_FAILURE)
-    }
+
     //Define the areas to search and add them as search regions
     stripper = new PDFTextStripperByArea()
     Rectangle lname = new Rectangle(25, 226, 240, 15)
@@ -42,5 +39,28 @@ flowFile = session.write(flowFile, { inputStream, outputStream ->
     json = json.replace(',"', ',\n"')
     //Overwrite flowfile contents with JSON
     outputStream.write(json.getBytes(StandardCharsets.UTF_8))
+    } catch (Exception e){
+        System.out.println(e.getMessage())
+        session.transfer(flowFile, REL_FAILURE)
+    }
 } as StreamCallback)
 session.transfer(flowFile, REL_SUCCESS)
+
+//OVERWRITE
+flowFile = session.get()
+if(!flowFile) return
+//def text = 'Hello world!' // Cast a closure with an inputStream and outputStream parameter to StreamCallback
+flowFile = session.write(flowFile, {inputStream, outputStream ->
+    text = IOUtils.toString(inputStream, StandardCharsets.UTF_8)
+    outputStream.write(text.reverse().getBytes(StandardCharsets.UTF_8))
+} as StreamCallback)
+session.transfer(flowFile, REL_SUCCESS)
+
+//WRITE
+flowFile = session.get()
+if(!flowFile) return
+//def text = 'Hello world!'
+// Cast a closure with an outputStream parameter to OutputStreamCallback
+flowFile = session.write(flowFile, {outputStream ->
+    outputStream.write(text.getBytes(StandardCharsets.UTF_8))
+} as OutputStreamCallback)
