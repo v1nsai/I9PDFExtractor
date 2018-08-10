@@ -6,6 +6,7 @@
       <root url="jar://$PROJECT_DIR$/nocr/libs/commons-logging-1.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/nocr/libs/gson-2.8.6-SNAPSHOT.jar!/" />
     </CLASSES>
+    <JAVADOC />
     <SOURCES />
   </library>
 </component>

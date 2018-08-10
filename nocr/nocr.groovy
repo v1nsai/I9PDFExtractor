@@ -21,6 +21,7 @@ def heightByPercent(double percent) {
 }
 
 def flowFile = session.get()
+if(!flowFile) return
 
 flowFile = session.write(flowFile, { inputStream, outputStream ->
     try {
@@ -52,13 +53,13 @@ flowFile = session.write(flowFile, { inputStream, outputStream ->
             ver = ver + swap
         }
         if(ver.contains('(Rev. 08/07/09)')){
-    //                System.out.println('it works')
+            //                System.out.println('it works')
         }
 
         //Define the areas to search and add them as search regions
         stripper = new PDFTextStripperByArea()
-    //            Rectangle fulLastName = new Rectangle(widthByPercent(2), heightByPercent(19.5), widthByPercent(58), heightByPercent(1))
-    //            stripper.addRegion("fulLastName", fulLastName)
+        //            Rectangle fullname = new Rectangle(widthByPercent(2), heightByPercent(19.5), widthByPercent(58), heightByPercent(1))
+        //            stripper.addRegion("fullname", fullname)
         Rectangle LastName = new Rectangle(widthByPercent(2), heightByPercent(19.5), widthByPercent(27), heightByPercent(1))
         stripper.addRegion("LastName", LastName)
         Rectangle FirstName = new Rectangle(widthByPercent(29), heightByPercent(19.5), widthByPercent(23), heightByPercent(1))
@@ -96,7 +97,7 @@ flowFile = session.write(flowFile, { inputStream, outputStream ->
         Rectangle TranslatorDateOfSignature = new Rectangle(widthByPercent(70), heightByPercent(48), widthByPercent(20), heightByPercent(1))
         stripper.addRegion("TranslatorDateOfSignature", TranslatorDateOfSignature)
         Rectangle boxAdoctitle = new Rectangle(widthByPercent(12), heightByPercent(56), widthByPercent(21.5), heightByPercent(1))
-    stripper.addRegion("List A - DocumentTitle", boxAdoctitle)
+        stripper.addRegion("List A - DocumentTitle", boxAdoctitle)
         Rectangle boxAissuer = new Rectangle(widthByPercent(13), heightByPercent(58), widthByPercent(20), heightByPercent(1))
         stripper.addRegion("List A - IssuingAuthority", boxAissuer)
         Rectangle boxAdocnumber1 = new Rectangle(widthByPercent(10.5), heightByPercent(60.5), widthByPercent(20), heightByPercent(1))
@@ -128,7 +129,7 @@ flowFile = session.write(flowFile, { inputStream, outputStream ->
         Rectangle examinertitle = new Rectangle(widthByPercent(71), heightByPercent(75.5), widthByPercent(20), heightByPercent(1))
         stripper.addRegion("examinertitle", examinertitle)
         Rectangle examinerbusiness_name = new Rectangle(widthByPercent(2), heightByPercent(78), widthByPercent(67), heightByPercent(1))
-        stripper.addRegion("EmployerBusinessName", examinerbusiness_address)
+        stripper.addRegion("EmployerBusinessName", examinerbusiness_name)
         Rectangle examinerbusiness_address = new Rectangle(widthByPercent(2), heightByPercent(78), widthByPercent(21), heightByPercent(1))
         stripper.addRegion("EmployerBusinessAddress", examinerbusiness_address)
         Rectangle examinerdate = new Rectangle(widthByPercent(23), heightByPercent(78), widthByPercent(45), heightByPercent(1))
@@ -147,10 +148,10 @@ flowFile = session.write(flowFile, { inputStream, outputStream ->
         stripper.addRegion("updatedate", updatedate)
 
         //Search the area and print the found text
-    //            stripper.setSortByPosition(true)
-    //            stripper.extractRegions(page)
-    //            String text = stripper.getTextForRegion('LastName')
-    //            System.out.println(text)
+        //            stripper.setSortByPosition(true)
+        //            stripper.extractRegions(page)
+        //            String text = stripper.getTextForRegion('lname')
+        //            System.out.println(text)
 
         //Load the results into a JSON
         def boxMap = [:]
@@ -175,3 +176,4 @@ flowFile = session.write(flowFile, { inputStream, outputStream ->
     }
 } as StreamCallback)
 session.transfer(flowFile, REL_SUCCESS)
+
