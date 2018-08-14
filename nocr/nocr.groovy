@@ -162,6 +162,10 @@ flowFile = session.write(flowFile, { inputStream, outputStream ->
             String box = stripper.getTextForRegion(region)
             boxMap.put(region, box)
         }
+
+        // Add the filename as an attribute
+        boxMap.put('filename', flowFile.getAttribute('filename'))
+
         Gson gson = new Gson()
         json = gson.toJson(boxMap, LinkedHashMap.class)
         json = json.replace('\\n', '')
