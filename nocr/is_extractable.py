@@ -1,21 +1,21 @@
-import os
-from pdfminer.pdfparser import PDFParser
-from pdfminer.pdfdocument import PDFDocument
-from pdfminer.pdfpage import PDFTextExtractionNotAllowed
-import sys
-
-os.chdir(r'C:\Users\Andrew Riffle\PycharmProjects\I9PDFExtractor\nocr')
+from os import chdir
+from sys import stdin, stdout
+from io import BytesIO
+import PyPDF2
 
 # Open and read the pdf file in binary mode
-# fp = open('2011_i9_test_noPIV.pdf', "rb")
-fp = sys.stdin.buffer.read()
+fp = stdin.buffer.read()
+fp = BytesIO(fp)
+# fp = open(r'C:\Users\Andrew Riffle\PycharmProjects\I9PDFExtractor\ocr\bond_i9_ocr.pdf', 'rb')
 
-# Create parser object to parse the pdf content
-parser = PDFParser(fp)
+# Attempt to extract text from the first page
+pdf = PyPDF2.PdfFileReader(fp)
+page = pdf.getPage(0)
+content = page.extractText()
 
-# Store the parsed content in PDFDocument object
-document = PDFDocument(parser)
+# If more than 5 characters are extracted, document is extractable
+if len(content) < 5:
+    raise ValueError('PDF is not extractable')
 
-# Check if document is extractable, if not abort
-if not document.is_extractable:
-    raise PDFTextExtractionNotAllowed
+if len(content) > 4:
+    print('Extractable')
