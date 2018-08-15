@@ -133,7 +133,8 @@ flowFile = session.write(flowFile, { inputStream, outputStream ->
         Rectangle examinerbusiness_address = new Rectangle(widthByPercent(2), heightByPercent(78), widthByPercent(21), heightByPercent(1))
         stripper.addRegion("EmployerBusinessAddress", examinerbusiness_address)
         Rectangle examinerdate = new Rectangle(widthByPercent(23), heightByPercent(78), widthByPercent(45), heightByPercent(1))
-        stripper.addRegion("examinerdate", examinerdate)
+        stripper.addRegion("Date Signed by Employer", examinerdate)
+        /*
         Rectangle updatename = new Rectangle(widthByPercent(2), heightByPercent(78), widthByPercent(67), heightByPercent(1))
         stripper.addRegion("updatename", updatename)
         Rectangle updaterehiredate = new Rectangle(widthByPercent(2), heightByPercent(78), widthByPercent(67), heightByPercent(1))
@@ -146,6 +147,7 @@ flowFile = session.write(flowFile, { inputStream, outputStream ->
         stripper.addRegion("updateexpiration", updateexpiration)
         Rectangle updatedate = new Rectangle(widthByPercent(2), heightByPercent(78), widthByPercent(67), heightByPercent(1))
         stripper.addRegion("updatedate", updatedate)
+        */
 
         //Search the area and print the found text
         //            stripper.setSortByPosition(true)
@@ -164,7 +166,7 @@ flowFile = session.write(flowFile, { inputStream, outputStream ->
         }
 
         // Add the filename as an attribute
-        boxMap.put('filename', flowFile.getAttribute('filename'))
+        boxMap.put('File', flowFile.getAttribute('filename'))
 
         Gson gson = new Gson()
         json = gson.toJson(boxMap, LinkedHashMap.class)

@@ -1,4 +1,3 @@
-from os import chdir
 from sys import stdin, stdout
 from io import BytesIO
 import PyPDF2
